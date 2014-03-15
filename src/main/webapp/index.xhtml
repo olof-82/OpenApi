@@ -71,17 +71,17 @@
 
                         <p:accordionPanel>
                             <p:tab title="Spotify">
-
+                                <div id="spotifyItems"> </div>
                             </p:tab>
                             <p:tab title="YouTube">
-
+                                <div id="youTubeItems"> </div>
                             </p:tab>
                             <p:tab title="SoundCloud">
                                 <div id="soundCloudItems"> </div>
                             </p:tab>
                         </p:accordionPanel>
                         <script type="text/javascript">
-                            setupMusicOnline();
+                            setupMusicOnline('#{backingBean.selectedEvent.artist}');
                         </script>
                     </p:panel>
                 </p:tab>

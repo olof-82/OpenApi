@@ -36,6 +36,8 @@ public class BackingBean implements Serializable {
     private String get;
 
     public void onPointSelect(PointSelectEvent event) {
+        selectedEvent = new MusicEvent();
+        selectedEvent.setArtist("Thore Skogman");
         lat = event.getLatLng().getLat();
         lng = event.getLatLng().getLng();
         
