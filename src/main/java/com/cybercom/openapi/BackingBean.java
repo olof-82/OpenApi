@@ -28,7 +28,7 @@ public class BackingBean implements Serializable {
                 + "api_key=4cbe1f4e4c84d5d9f0b923a41c5bac41&long=" + lng + "&lat=" + lat;
 
         System.out.println(url);
-        System.out.println("Hejsan hag heter Lennart");
+        System.out.println("Hejsan jag heter Lennart");
 
         Client client = ClientBuilder.newClient();
         String get = client.target(url).request(MediaType.APPLICATION_JSON).get(String.class);
