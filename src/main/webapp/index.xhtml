@@ -12,9 +12,13 @@
     <h:body>
         <h:form>
             <p:growl id="growl" sticky="true" showDetail="true"/>
-            <p:wizard flowListener="#{backingBean.onFlowProcess}">
-                <p:tab id="MapTab" title="Map">
-                    <p:panel header="map">
+            
+            <p:wizard widgetVar="wiz" flowListener="#{backingBean.onFlowProcess}">
+                
+                <p:tab id="map" title="Map">
+                    
+                    <p:panel header="Välj Din Plats">
+                        
                         <h:form>
                             <p:gmap widgetVar="w_gmap" center="55.5708457,13.0180405" zoom="15" type="ROADMAP" style="width:600px;height:400px">
                                 <p:ajax event="pointSelect" listener="#{backingBean.onPointSelect}" />
@@ -23,22 +27,18 @@
                     </p:panel>
                 </p:tab>
 
-                <p:tab id="address" title="List">
-                    <p:panel header="List">
-
-
-                    </p:panel>
-                </p:tab>
-
-                <p:tab id="contact" title="Sample Music">
-                    <p:panel header="Music">
-
+                <p:tab id="event" title="Lista">
+                    <p:panel header="Lista av Events">
 
                     </p:panel>
                 </p:tab>
 
+                <p:tab id="music" title="Musik">
+                    <p:panel header="Musik Online">
+
+                    </p:panel>
+                </p:tab>
             </p:wizard>
-
         </h:form>
         <script type="text/javascript">
             if (navigator.geolocation) {
