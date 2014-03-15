@@ -41,7 +41,6 @@ public class BackingBean implements Serializable {
         lat = event.getLatLng().getLat();
         lng = event.getLatLng().getLng();
         
-        //TODO: MOVE THIS OUT
         String url = "http://ws.audioscrobbler.com/2.0/?method=geo.getEvents&format=json&"
                 + "api_key=4cbe1f4e4c84d5d9f0b923a41c5bac41&long=" + lng + "&lat=" + lat;
 

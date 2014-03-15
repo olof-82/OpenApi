@@ -75,6 +75,5 @@ public class MusicEvent {
     public void setStreet(String street) {
         this.street = street;
     }
-    
-    
+   
 }
