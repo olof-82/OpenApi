@@ -3,7 +3,6 @@ package com.cybercom.openapi;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -16,7 +15,7 @@ import org.primefaces.event.map.PointSelectEvent;
  * @author oope
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class BackingBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(BackingBean.class.getName());
@@ -34,9 +33,6 @@ public class BackingBean implements Serializable {
         String get = client.target(url).request(MediaType.APPLICATION_JSON).get(String.class);
 
         System.out.println(get);
-
-        //JsonElement jelement = new JsonParser().parse(get);
-        //TODO
     }
 
     public String onFlowProcess(FlowEvent event) {
