@@ -6,7 +6,7 @@ function appendSoundCloudTrack(track) {
 
 function setupSoundCloudMusicOnline() {
     SC.get('/tracks', { q: 'Beardyman'}, function(tracks) {
-        for (var i = 0; i < Math.min(3, tracks.length); i++) {
+        for (var i = 0; i < Math.min(5, tracks.length); i++) {
             var item = tracks[i];
 //            $("#soundCloudItems").append('<div>' + item.user.username + " / " + item.title + '</div>');
             appendSoundCloudTrack(item);
@@ -24,16 +24,35 @@ function setupYouTubeMusicOnline() {
     $.get('http://gdata.youtube.com/feeds/api/videos',
         {q: 'Beardyman'}, function(xml) {
             var ids = $(xml).find('entry id');
-            for (var i = 0; i < Math.min(3, ids.length); i++) {
+            for (var i = 0; i < Math.min(5, ids.length); i++) {
                 var id = ids[i];
                 var youTubeId = id.textContent.substring(id.textContent.lastIndexOf('/') + 1);
                 appendYouTubeTrack(youTubeId);
             }
         });
-//    appendYouTubeTrack();
+}
+
+function appendSpotifyTrack(spotifyId) {
+    var divId = "spottantrack-" + spotifyId.substring(spotifyId.lastIndexOf(':')+1);
+    $("#spotifyItems").append('<div id="' + divId + '"/>');
+    $("#" + divId).html('<iframe src="https://embed.spotify.com/?uri=' + spotifyId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
+}
+
+function setupSpotifyMusicOnline() {
+    $.get('http://ws.spotify.com/search/1/track',
+        {q: 'artist:Beardyman'}, function(xml) {
+            var ids = $(xml).find('track');
+            for (var i = 0; i < Math.min(5, ids.length); i++) {
+                var id = ids[i];
+                var spotifyId = id.attributes['href'].textContent;
+                appendSpotifyTrack(spotifyId);
+            }
+        });
+
 }
 
 function setupMusicOnline() {
+    setupSpotifyMusicOnline();
     setupYouTubeMusicOnline();
     setupSoundCloudMusicOnline();
 }
