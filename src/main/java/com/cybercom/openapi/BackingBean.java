@@ -2,9 +2,12 @@ package com.cybercom.openapi;
 
 import java.io.Serializable;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.json.Json;
 import javax.json.stream.JsonParser;
@@ -15,18 +18,19 @@ import javax.ws.rs.core.MediaType;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.map.PointSelectEvent;
 
+
 /**
  *
  * @author oope
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class BackingBean implements Serializable {
     
     private double lat;
     private double lng;
-    private List<Event> events;
-    private Event selectedEvent;
+    private List<MusicEvent> events = new ArrayList<MusicEvent>();
+    private MusicEvent selectedEvent;
 
     private static final Logger LOG = Logger.getLogger(BackingBean.class.getName());
     private String get;
@@ -47,21 +51,32 @@ public class BackingBean implements Serializable {
         //System.out.println(get);
 
         JsonParser parser = Json.createParser(new StringReader(get));
-
+        boolean isArtist = false;
+        
         while (parser.hasNext()) {
             JsonParser.Event next = parser.next();
+            MusicEvent evt = new MusicEvent();
+            
             switch (next) {
                 
                 case KEY_NAME: {
-                    System.out.print(parser.getString() + "=");
+                    if(parser.getString().equals("artist")) {
+                        System.out.print(parser.getString() + "=");
+                        isArtist = true;
+                    } 
                     break;
                 }
                 case VALUE_STRING: {
-                    System.out.println(parser.getString());
+                    if(isArtist) {
+                        System.out.print(parser.getString());
+                        evt.setArtist(parser.getString());
+                        evt.setEventId(UUID.randomUUID().toString());
+                         events.add(evt);
+                        isArtist = false;
+                    }
                     break;
                 }
             }
-
         }
 
     }
@@ -86,19 +101,20 @@ public class BackingBean implements Serializable {
         this.lng = lng;
     }
 
-    public List<Event> getEvents() {
+    public List<MusicEvent> getEvents() {
+        System.out.println("events size" +events.size());
         return events;
     }
 
-    public void setEvents(List<Event> events) {
+    public void setEvents(List<MusicEvent> events) {
         this.events = events;
     }
 
-    public Event getSelectedEvent() {
+    public MusicEvent getSelectedEvent() {
         return selectedEvent;
     }
 
-    public void setSelectedEvent(Event selectedEvent) {
+    public void setSelectedEvent(MusicEvent selectedEvent) {
         this.selectedEvent = selectedEvent;
     }
 

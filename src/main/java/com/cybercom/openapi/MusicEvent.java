@@ -4,7 +4,7 @@ package com.cybercom.openapi;
  *
  * @author oope
  */
-public class Event {
+public class MusicEvent {
     
     private String eventId;
     
