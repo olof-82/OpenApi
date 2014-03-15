@@ -15,7 +15,7 @@
                 client_id: 'ccc52fbdd862906ad7c5e463c504498d'
             });
         </script>
-        </h:head>
+    </h:head>
     <h:body>
         <h:form>
             <p:growl id="growl" sticky="true" showDetail="true"/>
@@ -36,7 +36,33 @@
 
                 <p:tab id="event" title="Lista">
                     <p:panel header="Lista av Evenemang">
+                        <p:dataTable id="event_data" var="event" value="#{backingBean.events}" rowKey="#{event.eventId}"  
+                                     selection="#{backingBean.selectedEvent}" selectionMode="single">  
 
+                            <p:column headerText="Title">  
+                                #{event.title}  
+                            </p:column>  
+
+                            <p:column headerText="Artist">  
+                                #{event.artist}  
+                            </p:column>  
+
+                            <p:column headerText="Start Date" >  
+                                #{event.startDate}  
+                            </p:column>  
+
+                            <p:column headerText="Country">  
+                                #{event.country}  
+                            </p:column>
+                            
+                            <p:column headerText="City">  
+                                #{event.city}  
+                            </p:column>
+                            
+                            <p:column headerText="Street">  
+                                #{event.street}  
+                            </p:column>
+                        </p:dataTable>
                     </p:panel>
                 </p:tab>
 
