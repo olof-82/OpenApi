@@ -36,7 +36,7 @@
 
                 <p:tab id="event" title="Lista">
                     <p:panel header="Lista av Evenemang">
-                        <p:dataTable id="event" var="event" value="#{backingBean.events}" rowKey="#{event.eventId}"  
+                        <p:dataTable id="event_data" var="event" value="#{backingBean.events}" rowKey="#{event.eventId}"  
                                      selection="#{backingBean.selectedEvent}" selectionMode="single">  
 
                             <p:column headerText="Title">  
