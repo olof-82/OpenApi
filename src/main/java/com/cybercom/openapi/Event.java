@@ -19,8 +19,6 @@ public class Event {
     private String street;
     
     private String startDate;
-    
-    private String artistPicture;
 
     public String getArtist() {
         return artist;
@@ -77,12 +75,5 @@ public class Event {
     public void setStreet(String street) {
         this.street = street;
     }
-    
-    public String getArtistPicture() {
-        return artistPicture;
-    }
-    
-    public void setArtistPicture(String artistPicture) {
-        this.artistPicture = artistPicture;
-    }
+   
 }
