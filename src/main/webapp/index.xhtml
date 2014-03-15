@@ -5,19 +5,41 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
+        <title>Live Music Nearby</title>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     </h:head>
     <h:body>
-        <f:view contentType="text/html">
-            <h:form>
-                <!--<p:growl id="messages" showDetail="true" life="2000" />-->
-                <p:gmap widgetVar="w_gmap" center="55.5708457,13.0180405" zoom="15" type="ROADMAP" style="width:600px;height:400px">
-                    <p:ajax event="pointSelect" listener="#{backingBean.onPointSelect}" />
-                </p:gmap>
- 
-            </h:form>
-        </f:view>
+        <h:form>
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+            <p:wizard flowListener="#{backingBean.onFlowProcess}">
+                <p:tab id="MapTab" title="Map">
+                    <p:panel header="map">
+                        <h:form>
+                            <p:gmap widgetVar="w_gmap" center="55.5708457,13.0180405" zoom="15" type="ROADMAP" style="width:600px;height:400px">
+                                <p:ajax event="pointSelect" listener="#{backingBean.onPointSelect}" />
+                            </p:gmap>
+                        </h:form>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="address" title="List">
+                    <p:panel header="List">
+
+
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="contact" title="Sample Music">
+                    <p:panel header="Music">
+
+
+                    </p:panel>
+                </p:tab>
+
+            </p:wizard>
+
+        </h:form>
         <script type="text/javascript">
             if (navigator.geolocation) {
                 checkGeolocationByHTML5();

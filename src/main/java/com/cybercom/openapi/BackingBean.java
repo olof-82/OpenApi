@@ -1,15 +1,13 @@
 package com.cybercom.openapi;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import java.io.Serializable;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.map.PointSelectEvent;
 
 /**
@@ -19,6 +17,8 @@ import org.primefaces.event.map.PointSelectEvent;
 @Named
 @RequestScoped
 public class BackingBean implements Serializable {
+
+    private static final Logger LOG = Logger.getLogger(BackingBean.class.getName());
 
     public void onPointSelect(PointSelectEvent event) {
         double lat = event.getLatLng().getLat();
@@ -32,13 +32,18 @@ public class BackingBean implements Serializable {
 
         Client client = ClientBuilder.newClient();
         String get = client.target(url).request(MediaType.APPLICATION_JSON).get(String.class);
-        
+
         System.out.println(get);
 
         //JsonElement jelement = new JsonParser().parse(get);
-        
         //TODO
+    }
 
+    public String onFlowProcess(FlowEvent event) {
+        LOG.info("Current wizard step:" + event.getOldStep());
+        LOG.info("Next step:" + event.getNewStep());
+
+        return event.getNewStep();
     }
 
 }
