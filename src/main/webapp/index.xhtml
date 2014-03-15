@@ -8,17 +8,18 @@
         <title>Live Music Nearby</title>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="js/musicOnline.js"></script>
     </h:head>
     <h:body>
         <h:form>
             <p:growl id="growl" sticky="true" showDetail="true"/>
-            
+
             <p:wizard widgetVar="wiz" flowListener="#{backingBean.onFlowProcess}">
-                
+
                 <p:tab id="map" title="Map">
-                    
+
                     <p:panel header="Välj Din Plats">
-                        
+
                         <h:form>
                             <p:gmap widgetVar="w_gmap" center="55.5708457,13.0180405" zoom="15" type="ROADMAP" style="width:600px;height:400px">
                                 <p:ajax event="pointSelect" listener="#{backingBean.onPointSelect}" />
@@ -36,6 +37,22 @@
                 <p:tab id="music" title="Musik">
                     <p:panel header="Musik Online">
 
+                        <p:accordionPanel>
+                            <p:tab title="Spotify">
+
+                            </p:tab>
+                            <p:tab title="YouTube">
+
+                            </p:tab>
+                            <p:tab title="SoundCloud">
+                                <script type="text/javascript">
+                                    console.log("Yoo hoo");
+                                </script>
+                            </p:tab>
+                        </p:accordionPanel>
+                        <script type="text/javascript">
+
+                        </script>
                     </p:panel>
                 </p:tab>
             </p:wizard>

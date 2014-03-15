@@ -19,6 +19,7 @@ import org.primefaces.event.map.PointSelectEvent;
 public class BackingBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(BackingBean.class.getName());
+    private String get;
 
     public void onPointSelect(PointSelectEvent event) {
         double lat = event.getLatLng().getLat();
@@ -30,7 +31,7 @@ public class BackingBean implements Serializable {
         System.out.println(url);
 
         Client client = ClientBuilder.newClient();
-        String get = client.target(url).request(MediaType.APPLICATION_JSON).get(String.class);
+        get = client.target(url).request(MediaType.APPLICATION_JSON).get(String.class);
 
         System.out.println(get);
     }
